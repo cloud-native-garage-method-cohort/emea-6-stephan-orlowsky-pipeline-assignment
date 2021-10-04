@@ -1,27 +1,5 @@
+---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: linting-yaml-pipeline
-spec:
-  tasks:
-    - name: git-clone
-      taskRef:
-        name: git-clone-v0-16-3
-        kind: ClusterTask
-      workspaces:
-        - name: output
-          workspace: linting-workspace
-      params:
-        - name: url
-          value: git@github.com:cloud-native-garage-method-cohort/emea-6-stephan-orlowsky-pipeline-assignment.git
-    - name: yaml-lint-run
-      taskRef:
-        name: yaml-lint
-      workspaces:
-        - name: shared-workspace
-          workspace: linting-workspace
-      params:
-        - name: args
-          value: ["."]
-  workspaces:
-    - name: linting-workspace
